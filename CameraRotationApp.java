@@ -462,7 +462,7 @@ public class CameraRotationApp extends Application
                 ),
                 new KeyFrame(
                         Duration.seconds(5), 
-                        new KeyValue(slider.valueProperty(), MAX_CUBE_FRAME)
+                        new KeyValue(slider.valueProperty(), MAX_CUBE_FRAME-1)
                 )
         );
         timeline.setCycleCount(1);
