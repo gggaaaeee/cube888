@@ -31,6 +31,7 @@ import javafx.scene.control.MenuItem;
 //import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 //import javafx.scene.control.ToggleGroup;
+import javafx.stage.FileChooser;
 
 public class CameraRotationApp extends Application 
 {
@@ -520,8 +521,22 @@ public class CameraRotationApp extends Application
 		return pane;
 	}
 
-    private void FileSaveMenu()
+    private void FileSaveMenu(Stage stage)
     {
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Open Cube Frame");
+    	//fileChooser.setInitialDirectory(new File(System.getProperty("D:\\Users\\gggaa\\eclipse-workspace\\CameraRotationApp")));
+    			
+    	fileChooser.getExtensionFilters().addAll(
+    		    new FileChooser.ExtensionFilter("All Images", "*.*"),
+    		    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+    		    new FileChooser.ExtensionFilter("GIF", "*.gif"),
+    		    new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+    		    new FileChooser.ExtensionFilter("PNG", "*.png")
+    		);
+        File file = fileChooser.showOpenDialog(stage);
+        System.out.println(file);
+    	
 	    try 
 	    {
 	    	int i=0;
@@ -539,7 +554,7 @@ public class CameraRotationApp extends Application
 	    }
     }
     
-    private void FileLoadMenu()
+    private void FileLoadMenu(Stage stage)
     {
 	    try 
 	    {
@@ -583,7 +598,7 @@ public class CameraRotationApp extends Application
 	    cubeFrame[iFrame].CopyToBox(box3d);        
     }
 
-    private MenuBar CreateMenu()
+    private MenuBar CreateMenu(Stage stage)
     {
 	    MenuBar menuBar = new MenuBar();
     	
@@ -595,8 +610,8 @@ public class CameraRotationApp extends Application
 	    MenuItem exitMenuItem = new MenuItem("Exit");
 	    
 	    exitMenuItem.setOnAction(actionEvent -> Platform.exit());
-	    saveMenuItem.setOnAction(actionEvent -> FileSaveMenu());
-	    loadMenuItem.setOnAction(actionEvent -> FileLoadMenu());
+	    saveMenuItem.setOnAction(actionEvent -> FileSaveMenu(stage));
+	    loadMenuItem.setOnAction(actionEvent -> FileLoadMenu(stage));
 	    newMenuItem.setOnAction(actionEvent -> FileNewMenu());
 	    
 	    fileMenu.getItems().addAll(newMenuItem, saveMenuItem, loadMenuItem ,new SeparatorMenuItem(),exitMenuItem);
@@ -605,7 +620,7 @@ public class CameraRotationApp extends Application
 	    return menuBar;
     }
 	
-    private Parent createDesk() throws Exception 
+    private Parent createDesk(Stage stage) throws Exception 
 	{
 		int i=0;
 		subscene3d = createSubscene3D();	
@@ -640,7 +655,7 @@ public class CameraRotationApp extends Application
 		
 		BorderPane paneBottom = createBorderBottom();
 		
-		MenuBar menuBar = CreateMenu();
+		MenuBar menuBar = CreateMenu(stage);
 		rootv2.getChildren().addAll(menuBar,rooth,paneBottom);	
 					
 		return rootv2;
@@ -656,7 +671,7 @@ public class CameraRotationApp extends Application
 			 		
 		//BorderPane paneBottom = createBorderBottom();
 		BorderPane pane = createBorder();
-		Parent desk = createDesk(); 		
+		Parent desk = createDesk(stage); 		
 		
 		pane.setLeft(desk);
 		//pane.setBottom(paneBottom);
