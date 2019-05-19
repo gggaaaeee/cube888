@@ -359,14 +359,9 @@ public class CameraRotationApp extends Application
         yRotate.setAngle(0);
 	}
 
-	private void ButtonTilted_M45()
+	private void ButtonTilted(int angle)
 	{
-        yRotate.setAngle(-45);
-	}
-
-	private void ButtonTilted_P45()
-	{
-        yRotate.setAngle(45);
+        yRotate.setAngle(angle);	
 	}
 	
 	private void checkBoxLine(boolean bLine)
@@ -393,16 +388,22 @@ public class CameraRotationApp extends Application
 		Button button1 = new Button("Reset Position");
 		button1.setOnAction(e->{ButtonReset();});
 
-		Button button2 = new Button("-45 deg");
-		button2.setOnAction(e->{ButtonTilted_M45();});
+		Button button2 = new Button("-90 deg");
+		button2.setOnAction(e->{ButtonTilted(-90);});
+		
+		Button button3 = new Button("-45 deg");
+		button3.setOnAction(e->{ButtonTilted(-45);});
 
-		Button button3 = new Button("+45 deg");
-		button3.setOnAction(e->{ButtonTilted_P45();});
+		Button button4 = new Button("+45 deg");
+		button4.setOnAction(e->{ButtonTilted(45);});
+
+		Button button5 = new Button("+90 deg");
+		button5.setOnAction(e->{ButtonTilted(90);});
 		
 		CheckBox checkBox = new CheckBox("Line");
 		checkBox.setOnAction(e->{checkBoxLine(checkBox.isSelected());});
 		
-		ToolBar toolBar = new ToolBar(button1,button2,button3);
+		ToolBar toolBar = new ToolBar(button1,button2,button3,button4,button5);
 		toolBar.setOrientation(Orientation.VERTICAL);
 		
 		pane.setRight(toolBar);
