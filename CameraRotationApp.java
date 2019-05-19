@@ -525,28 +525,23 @@ public class CameraRotationApp extends Application
     {
     	FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Open Cube Frame");
-    	//fileChooser.setInitialDirectory(new File(System.getProperty("D:\\Users\\gggaa\\eclipse-workspace\\CameraRotationApp")));
     			
     	fileChooser.getExtensionFilters().addAll(
-    		    new FileChooser.ExtensionFilter("All Images", "*.*"),
-    		    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-    		    new FileChooser.ExtensionFilter("GIF", "*.gif"),
-    		    new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-    		    new FileChooser.ExtensionFilter("PNG", "*.png")
+    		    new FileChooser.ExtensionFilter("ser", "*.ser")
     		);
-        File file = fileChooser.showOpenDialog(stage);
+        File file = fileChooser.showSaveDialog(stage);
         System.out.println(file);
     	
 	    try 
 	    {
 	    	int i=0;
-	        FileOutputStream fileOut = new FileOutputStream("cube888.ser");
+	        FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
 	        ObjectOutputStream out   = new ObjectOutputStream(fileOut);
 	        for (i=0;i<MAX_CUBE_FRAME;i++)
 	        	out.writeObject(cubeFrame[i]);
 	        out.close();
 	        fileOut.close();
-	        System.out.printf("Serialized data is saved in cube888.ser");
+	        System.out.printf("Serialized data is saved in %s",file.getAbsolutePath());
 	     } 
 	    catch (IOException i) 
 	    {
@@ -556,10 +551,19 @@ public class CameraRotationApp extends Application
     
     private void FileLoadMenu(Stage stage)
     {
-	    try 
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Open Cube Frame");
+    			
+    	fileChooser.getExtensionFilters().addAll(
+    		    new FileChooser.ExtensionFilter("ser", "*.ser")
+    		);
+        File file = fileChooser.showOpenDialog(stage);
+        System.out.println(file);
+
+        try 
 	    {
 	    	int i=0;
-	        FileInputStream fileIn = new FileInputStream("cube888.ser");
+	        FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
 	        ObjectInputStream in = new ObjectInputStream(fileIn);
 	        for (i=0;i<MAX_CUBE_FRAME;i++)
 	        {
