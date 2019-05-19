@@ -479,7 +479,7 @@ public class CameraRotationApp extends Application
 		Button button2 = new Button("Previous frame");
 		Button button3 = new Button("Play");
 		Button button4 = new Button("Copy frame");
-		Slider slider = new Slider(0, MAX_CUBE_FRAME, 0);
+		Slider slider = new Slider(0, MAX_CUBE_FRAME-1, 0);
 	    HBox rooth1 = new HBox();
 	    VBox rootv1 = new VBox();
 
@@ -501,7 +501,7 @@ public class CameraRotationApp extends Application
 		
 	    slider.valueProperty().addListener((observable, oldvalue, newvalue) ->
 	            {
-	                int i = newvalue.intValue();
+	                int i = newvalue.intValue();	                
 	                iFrame = i;
 	                cubeFrame[iFrame].CopyToBox(box3d);
 	            } );
